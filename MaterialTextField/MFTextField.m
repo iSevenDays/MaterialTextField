@@ -511,7 +511,7 @@ static NSTimeInterval const MFDefaultAnimationDuration = 0.3;
     UIColor *color;
 
     if (self.isFirstResponder) {
-        color = (self.hasError) ? self.errorColor : self.tintColor;
+        color = (self.hasError) ? self.errorColor : self.placeholderColor;
     }
     else {
         color = self.placeholderColor;
