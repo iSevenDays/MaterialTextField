@@ -79,6 +79,7 @@ static NSTimeInterval const MFDefaultAnimationDuration = 0.3;
     self.alwaysShowPlaceholderOnTop = NO;
     self.animatesPlaceholder = YES;
     self.placeholderColor = [UIColor mf_darkGrayColor];
+    self.focusedPlaceholderColor = [UIColor mf_darkGrayColor];
     self.placeholderFont = self.defaultPlaceholderFont;
 
     self.underlineHeight = 1.0f;
@@ -265,6 +266,12 @@ static NSTimeInterval const MFDefaultAnimationDuration = 0.3;
 - (void)setPlaceholderColor:(UIColor *)placeholderColor
 {
     _placeholderColor = placeholderColor;
+    [self updatePlaceholderColor];
+}
+
+- (void)setFocusedPlaceholderColor:(UIColor *)focusedPlaceholderColor
+{
+    _focusedPlaceholderColor = focusedPlaceholderColor;
     [self updatePlaceholderColor];
 }
 
@@ -511,10 +518,10 @@ static NSTimeInterval const MFDefaultAnimationDuration = 0.3;
     UIColor *color;
 
     if (self.isFirstResponder) {
-        color = (self.hasError) ? self.errorColor : self.placeholderColor;
+        color = (self.hasError) ? self.errorColor : self.focusedPlaceholderColor;
     }
     else {
-        color = self.placeholderColor;
+        color = (self.hasError) ? self.errorColor : self.placeholderColor;
     }
 
     self.placeholderLabel.textColor = color;
